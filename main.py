@@ -28,7 +28,7 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
-        self.response.write('Frank is gay')
+        self.response.write('Frank is a gay mofo')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
