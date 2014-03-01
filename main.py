@@ -44,13 +44,13 @@ class Argument(db.Model):
 
     created = db.DateTimeProperty(auto_now_add = True)
     #TODO: Update this shitKHJK
-    def arg.score_up1():
+    def score_up1():
         score += 1
-    def arg.score_up2():
+    def score_up2():
         score -= 1
-    def arg.ratingUp():
+    def ratingUp():
         rating += 1
-
+    
 class MainHandler(Handler):
     def get(self):
         self.render("index.html")
@@ -110,8 +110,8 @@ class StartPlayHandler(Handler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/newArgument', NewArgHandler),
+    ('/argument', NewArgHandler),
     ('/start/', StartPlayHandler),
-    ('/start/([0-9]+)', PlaytHandler),
+    ('/start/([0-9]+)', PlayHandler),
     ('/thanks', ThanksHandler)
 ], debug=True)
