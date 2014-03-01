@@ -27,6 +27,7 @@ class Handler(webapp2.RequestHandler):
         return t.render(params)
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
+
 #"Row" in database table
 class Argument(db.Model):
     title = db.StringProperty(required = True)
@@ -42,15 +43,23 @@ class Argument(db.Model):
     #improve to hotness algorithm = db.integer
 
     created = db.DateTimeProperty(auto_now_add = True)
-    #TODO: Update this shit
-    def score_up1():
+    #TODO: Update this shitKHJK
+    def arg.score_up1():
         score += 1
-    def score_up2():
+    def arg.score_up2():
         score -= 1
-    def ratingUp():
+    def arg.ratingUp():
         rating += 1
 
 class MainHandler(Handler):
+    def get(self):
+        self.render("index.html")
+
+class NewArgHandler(Handler):
+    def get(self):
+        self.render("argument.html")
+
+    def post(self):
         #TODO: do handling on creating a new argument
         title = self.request.get('title')
         name1 = self.request.get('name1')
@@ -61,7 +70,7 @@ class MainHandler(Handler):
             a = Argument(title = title, name1 = name1, name2 = name2, arg1 = arg1,
                           arg2 = arg2, score = 0, rating = 0)
             a.put()
-            self.redirect("/thanks")#TODO: make thanks.html
+            self.redirect("/thanks")#TODO: thanks.html
         else:
             error = "Please fill in all required information."
             self.render("argument.html", title = title, name1 = name1,
