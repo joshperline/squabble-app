@@ -4,6 +4,8 @@
 
 body {
     font-family: "Open Sans", Helvetica, sans-serif;
+    color: black;
+    background-color: black;
 }
 
 h1 {
@@ -14,7 +16,7 @@ h1 {
     height: 600px;
     display: table;
     width: 100%;
-    background-color: #0C3;
+    background-color: #111;
     text-align: center;
 }
 
@@ -37,3 +39,31 @@ h1 {
     width: 100%;
     padding: 2em 0;
 }
+
+.new-argument-landing {
+    height: 600px;
+    display: table;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+}
+
+.new-argument-landing:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.new-argument-message {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    padding: 2em 0;
+}
+
+
+
+
+
+
