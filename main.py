@@ -10,6 +10,8 @@ import time
 #post = uploading/updating, no max length
 #get = recieving stuff, dont change server
 
+"""TODO: Profiles later."""
+
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
@@ -25,6 +27,18 @@ class Handler(webapp2.RequestHandler):
         return t.render(params)
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
+
+class Argument(db.Model):
+	name1 = db.StringProperty(required = True)
+    arg1 = db.StringProperty(required = True)
+
+    name2 = db.StringProperty(required = True)
+    arg2 = db.StringProperty(required = True)
+
+    #score = db.integer
+    #rating/upvotes/make hotness algorithm = db.integer
+
+    created = db.DateTimeProperty(auto_now_add = True)
 
 class MainHandler(Handler):
     def get(self):
