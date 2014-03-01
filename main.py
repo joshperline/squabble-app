@@ -27,7 +27,7 @@ class Handler(webapp2.RequestHandler):
         return t.render(params)
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
-
+    
 #"Row" in database table
 class Argument(db.Model):
     title = db.StringProperty(required = True)
@@ -52,14 +52,6 @@ class Argument(db.Model):
         rating += 1
 
 class MainHandler(Handler):
-    def get(self):
-        self.render("index.html")
-
-class NewArgHandler(Handler):
-    def get(self):
-        self.render("argument.html")
-
-    def post(self):
         #TODO: do handling on creating a new argument
         title = self.request.get('title')
         name1 = self.request.get('name1')
