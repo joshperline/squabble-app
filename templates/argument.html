@@ -53,52 +53,45 @@
 
 <body>
     <div class="new-argument-landing">
-        <form>
+        <form method="post">
             Title:
             <br>
             <input type="text" name="title" value="{{title}}">
             <br>
-        </form>
-        <div class="new-argument-message">
-            <div id="column1-wrap">
-                <div id="column1">
-                    <form>
+            <div class="new-argument-message">
+                <div id="column1-wrap">
+                    <div id="column1">
                         Person 1
                         <br>
                         <input type="text" name="person1" placeholder="Bob">
                         <br>
                         <input type="radio" name="sex" value="male">Male
                         <input type="radio" name="sex" value="female">Female
-                        <br>
-                    </form>
-                    <form>
-                        Argument
+                        <br>Argument
                         <br>
                         <textarea name="arg1">{{art}}</textarea>
                         <br>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div id="column2">
-                <form>
+                <div id="column2">
+
                     Person 2
                     <br>
-                    <input type="text" name="person1" placeholder="Bob">
+                    <input type="text" name="person1" placeholder="Alice">
                     <br>
                     <input type="radio" name="sex" value="male">Male
                     <input type="radio" name="sex" value="female">Female
-                    <br>
-                </form>
-                <form>
-                    Argument
+                    <br>Argument
                     <br>
                     <textarea name="arg1">{{art}}</textarea>
                     <br>
-                </form>
+
+                </div>
+                <div id="clear"></div>
+                <button type="button" name="start">Take This to Court</button>
+                <div class="error">{{error}}</div>
             </div>
-            <div id="clear"></div>
-            <button type="button" name="start">Take This to Court</button>
-        </div>
+        </form>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
