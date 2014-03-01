@@ -38,11 +38,13 @@ class Argument(db.Model):
     name2 = db.StringProperty(required = True)
     arg2 = db.TextProperty(required = True)
 
+    created = db.DateTimeProperty(auto_now_add = True)
+
+    #who's winning
     score = db.IntegerProperty()
     rating = db.IntegerProperty()
     #improve to hotness algorithm = db.integer
 
-    created = db.DateTimeProperty(auto_now_add = True)
     #TODO: Update this shitKHJK
     def score_up1():
         score += 1
