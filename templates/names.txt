@@ -1,0 +1,5 @@
+Home button = "home"
+Make New Argument = "new"
+Contact = "contact"
+About = "about"
+Start playing = "start"
