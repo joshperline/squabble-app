@@ -56,7 +56,7 @@
         <form>
             Title:
             <br>
-            <input type="text" name="title">
+            <input type="text" name="title" value="{{title}}">
             <br>
         </form>
         <div class="new-argument-message">
@@ -74,16 +74,16 @@
                     <form>
                         Argument
                         <br>
-                        <input type="text" name="argument1">
+                        <textarea name="arg1">{{art}}</textarea>
                         <br>
                     </form>
                 </div>
             </div>
             <div id="column2">
                 <form>
-                    Person 1
+                    Person 2
                     <br>
-                    <input type="text" name="person1" placeholder="Alice">
+                    <input type="text" name="person1" placeholder="Bob">
                     <br>
                     <input type="radio" name="sex" value="male">Male
                     <input type="radio" name="sex" value="female">Female
@@ -92,12 +92,12 @@
                 <form>
                     Argument
                     <br>
-                    <input type="text" name="argument1">
+                    <textarea name="arg1">{{art}}</textarea>
                     <br>
                 </form>
             </div>
             <div id="clear"></div>
-            <button type="button" name="start">Start</button>
+            <button type="button" name="start">Take This to Court</button>
         </div>
     </div>
 
