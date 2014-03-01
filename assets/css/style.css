@@ -16,7 +16,7 @@ h1 {
     height: 600px;
     display: table;
     width: 100%;
-    background-color: #111;
+    background-color: #fff;
     text-align: center;
 }
 
@@ -60,6 +60,24 @@ h1 {
     vertical-align: middle;
     width: 100%;
     padding: 2em 0;
+}
+
+#column1-wrap{
+    width: 100%;
+}
+
+#column1{
+    background-color: white;
+    float: left;
+    width: 50%;
+}
+#column2{
+    background-color: white;
+    float: right;
+    width: 50%;
+}
+#clear{
+    clear: both;
 }
 
 

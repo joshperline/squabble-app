@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" name="home">Home</a>
+            <a class="navbar-brand" href="./index" name="home">Home</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,18 +60,44 @@
             <br>
         </form>
         <div class="new-argument-message">
-            <form>
-                <input type="text" name="person1" placeholder="Person 1">
-                <br>
-                <input type="radio" name="sex" value="male">Male
-                <input type="radio" name="sex" value="female">Female
-                <br>
-                <input type="text" name="person2" placeholder="Person 2">
-                <br>
-                <input type="radio" name="sex" value="male">Male
-                <input type="radio" name="sex" value="female">Female
-                <br>
-            </form>
+            <div id="column1-wrap">
+                <div id="column1">
+                    <form>
+                        Person 1
+                        <br>
+                        <input type="text" name="person1" placeholder="Bob">
+                        <br>
+                        <input type="radio" name="sex" value="male">Male
+                        <input type="radio" name="sex" value="female">Female
+                        <br>
+                    </form>
+                    <form>
+                        Argument
+                        <br>
+                        <input type="text" name="argument1">
+                        <br>
+                    </form>
+                </div>
+            </div>
+            <div id="column2">
+                <form>
+                    Person 1
+                    <br>
+                    <input type="text" name="person1" placeholder="Alice">
+                    <br>
+                    <input type="radio" name="sex" value="male">Male
+                    <input type="radio" name="sex" value="female">Female
+                    <br>
+                </form>
+                <form>
+                    Argument
+                    <br>
+                    <input type="text" name="argument1">
+                    <br>
+                </form>
+            </div>
+            <div id="clear"></div>
+            <button type="button" name="start">Start</button>
         </div>
     </div>
 
