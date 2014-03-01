@@ -28,6 +28,7 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
+#"Row" in database table
 class Argument(db.Model):
 	name1 = db.StringProperty(required = True)
     arg1 = db.StringProperty(required = True)
@@ -35,8 +36,9 @@ class Argument(db.Model):
     name2 = db.StringProperty(required = True)
     arg2 = db.StringProperty(required = True)
 
-    #score = db.integer
-    #rating/upvotes/make hotness algorithm = db.integer
+    score = db.IntegerProperty()
+    rating = db.IntegerProperty()
+    #make hotness algorithm = db.integer
 
     created = db.DateTimeProperty(auto_now_add = True)
 
@@ -45,5 +47,7 @@ class MainHandler(Handler):
         self.response.write('Big Things are coming. Check this out. ')
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/newArgument', NewArgHandler),
+    ('/play/([0-9]+)', NewArgHandler)
 ], debug=True)
