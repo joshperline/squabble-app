@@ -30,24 +30,69 @@ class Handler(webapp2.RequestHandler):
 
 #"Row" in database table
 class Argument(db.Model):
-	name1 = db.StringProperty(required = True)
-    arg1 = db.StringProperty(required = True)
+    title = db.StringProperty(required = True)
+
+    name1 = db.StringProperty(required = True)
+    arg1 = db.TextProperty(required = True)
 
     name2 = db.StringProperty(required = True)
-    arg2 = db.StringProperty(required = True)
+    arg2 = db.TextProperty(required = True)
 
     score = db.IntegerProperty()
     rating = db.IntegerProperty()
-    #make hotness algorithm = db.integer
+    #improve to hotness algorithm = db.integer
 
     created = db.DateTimeProperty(auto_now_add = True)
 
 class MainHandler(Handler):
     def get(self):
-        self.response.write('Big Things are coming. Check this out. ')
+        self.render("index.html")
+
+class NewArgHandler(Handler):
+    def get(self):
+        self.render("newArgument.html")
+
+    def post(self):
+        #TODO: do handling on creating a new argument
+        title = self.request.get('title')
+        name1 = self.request.get('name1')
+        name2 = self.request.get('name2')
+        arg1 = self.request.get('arg1')
+        arg2 = self.request.get('arg2')
+        if (title and name1 and name2 and arg1 and arg2):
+            a = Argument(title = title, name1 = name1, name2 = name2, arg1 = arg1,
+                          arg2 = arg2, score = 0, rating = 0)
+            a.put()
+            self.redirect("/thanks")#TODO: thanks.html
+        else:
+            error = "Please fill in all required information."
+            self.render("newArgument.html", title = title, name1 = name1,
+                        name2 = name2, arg1 = arg1, arg2 = arg2, error = error)
+
+class ThanksHandler(Handler):
+	def get(self):
+		self.response.write("Thanks")
+
+class PlayHandler(Handler):
+    def get(self, play_id):
+        key = db.Key.from_path('Argument', int(play_id))
+        arg = db.get(key)
+        if not arg:
+            self.error(404)
+            return
+        self.render("play.html", arg = arg)#TODO: Make sure elements are in dot notation
+
+class StartPlayHandler(Handler):
+    def get(self):
+        #TODO: Get best question/random, existing 
+        p = "best choice"#TODO: REPLACE WITH GQL
+        self.redirect('blog/%s', str(p.key().id()))
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/newArgument', NewArgHandler),
-    ('/play/([0-9]+)', NewArgHandler)
+    ('/play/', StartPlayHandler),
+    ('/play/([0-9]+)', PlayHandler),
+    ('/thanks', ThanksHandler)
 ], debug=True)
