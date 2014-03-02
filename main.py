@@ -96,7 +96,7 @@ class ThanksHandler(Handler):
 
 class JudgeHandler(Handler):
     def get(self):
-        #TODO: Get best question/random, existing 
+        #TODO: Get best question/random, existing
         p = db.GqlQuery("SELECT * FROM Argument ORDER BY rating DESC")[0]
         self.redirect('judge/%s', str(p.key().id()))
 
@@ -137,7 +137,7 @@ class PlayHandler(Handler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/argument', NewArgHandler),
-    ('/judge/', JudgeHandler),
+    ('/judge', JudgeHandler),
     ('/judge/([0-9]+)', PlayHandler),
     ('/thanks', ThanksHandler)
 ], debug=True)
