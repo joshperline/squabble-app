@@ -52,28 +52,28 @@ class Argument(db.Expando):
     created = db.DateTimeProperty(auto_now_add = True)
 
     #who's winning
-    score1 = db.IntegerProperty()
-    score2 = db.IntegerProperty()
+    score1 = db.IntegerProperty(required = True)
+    score2 = db.IntegerProperty(required = True)
 
-    maleCorrect = db.IntegerProperty()
-    femaleCorrect = db.IntegerProperty()
+    maleCorrect = db.IntegerProperty(required = True)
+    femaleCorrect = db.IntegerProperty(required = True)
 
-    rating = db.IntegerProperty()
+    rating = db.IntegerProperty(required = True)
     #improve to hotness algorithm = db.integer
 
     #TODO: Update this shitKHJK
-    "**** CHANGE THESE Methods IN ACTUAL CODE****"
-    def score_up1(self):
-        score1 += 1
-    def score_up2(self):
-        score2 += 1
+    "**** CHANGE THESE Methods INTO ACTUAL CODE****"
+    # def score_up1(self):
+    #     score1 += 1
+    # def score_up2(self):
+    #     score2 += 1
 
-    def ratingUp(self):
-        rating += 1
-    def maleCorrect(self):
-        maleCorrect += 1
-    def femaleCorrect(self):
-        femaleCorrect += 1
+    # def ratingUp(self):
+    #     rating += 1
+    # def maleCorrect(self):
+    #     maleCorrect += 1
+    # def femaleCorrect(self):
+    #     femaleCorrect += 1
 
 class MainHandler(Handler):
     def get(self):
@@ -107,10 +107,10 @@ class NewArgHandler(Handler):
             idList.theList.append((a.key().id()))
             idList.put()
 
-            self.response.write(str(len(idList.theList)))
+            #self.response.write(str(len(idList.theList)))
             
-            # url = 'judge/' + str(a.key().id())
-            # self.redirect(url)
+            url = 'judge/' + str(a.key().id())
+            self.redirect(url)
             #self.redirect(url)#TODO: MAKE thanks.html
         else:
             error = "Please fill in all required information."
@@ -141,20 +141,24 @@ class JudgeHandler(Handler):
         self.redirect(url)
 
 class PlayHandler(Handler):
-    def __init__(self, x, y):
-        Handler.__init__(self,x,y)
-        self.arg = None
+    # def __init__(self, x, y):
+    #     Handler.__init__(self,x,y)
+    #     self.arg = None
 
     def get(self, arg_id):
         key = db.Key.from_path('Argument', int(arg_id))
-        self.arg = arg = db.get(key)
+        arg = db.get(key)
         if not arg:
             self.error(404)
             return
         self.render("judge.html", squabble = arg)#TODO: Make sure elements are in dot notation
-    def post(self):
+
+    def post(self, arg_id):
         #change arg's score and rating.
-        arg = self.arg
+        #arg = self.arg
+        key = db.Key.from_path('Argument', int(arg_id))
+        arg = db.get(key)
+
         decision = self.request.get('decision')
         star = self.request.get('favorite')
         if (decision):
