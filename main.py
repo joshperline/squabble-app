@@ -106,7 +106,7 @@ class ThanksHandler(Handler):
 class JudgeHandler(Handler):
     def get(self):
         #TODO: Get best question/random, existing
-        args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")
+        args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")#DESC=descending order
         for arg in args:
             a = arg
             break
@@ -121,7 +121,6 @@ class PlayHandler(Handler):
     def get(self, arg_id):
         key = db.Key.from_path('Argument', int(arg_id))
         self.arg = arg = db.get(key)
-        #FUCKKKKKKKKKKKKKKK
         if not arg:
             self.error(404)
             return
