@@ -62,18 +62,18 @@ class Argument(db.Expando):
     #improve to hotness algorithm = db.integer
 
     #TODO: Update this shitKHJK
-    "**** CHANGE THESE Methods INTO ACTUAL CODE****"
-    # def score_up1(self):
-    #     score1 += 1
-    # def score_up2(self):
-    #     score2 += 1
+    "**** CHANGE THESE Methods IN ACTUAL CODE****"
+    def score_up1(self):
+        score1 += 1
+    def score_up2(self):
+        score2 += 1
 
-    # def ratingUp(self):
-    #     rating += 1
-    # def maleCorrect(self):
-    #     maleCorrect += 1
-    # def femaleCorrect(self):
-    #     femaleCorrect += 1
+    def ratingUp(self):
+        rating += 1
+    def maleCorrect(self):
+        maleCorrect += 1
+    def femaleCorrect(self):
+        femaleCorrect += 1
 
 class MainHandler(Handler):
     def get(self):
@@ -107,10 +107,10 @@ class NewArgHandler(Handler):
             idList.theList.append((a.key().id()))
             idList.put()
 
-            #self.response.write(str(len(idList.theList)))
-            
-            url = 'judge/' + str(a.key().id())
-            self.redirect(url)
+            self.response.write(str(len(idList.theList)))
+
+            # url = 'judge/' + str(a.key().id())
+            # self.redirect(url)
             #self.redirect(url)#TODO: MAKE thanks.html
         else:
             error = "Please fill in all required information."
@@ -141,9 +141,6 @@ class JudgeHandler(Handler):
         self.redirect(url)
 
 class PlayHandler(Handler):
-    # def __init__(self, x, y):
-    #     Handler.__init__(self,x,y)
-    #     self.arg = None
 
     def get(self, arg_id):
         key = db.Key.from_path('Argument', int(arg_id))
@@ -155,17 +152,15 @@ class PlayHandler(Handler):
 
     def post(self, arg_id):
         #change arg's score and rating.
-        #arg = self.arg
         key = db.Key.from_path('Argument', int(arg_id))
         arg = db.get(key)
-
         decision = self.request.get('decision')
         star = self.request.get('favorite')
         if (decision):
             #Also keeps track of male vs female
             if decision == "1":
                 #arg.score_up1()
-                arg.score1 += 1 
+                arg.score1 += 1
                 if arg.sex1 == "male":
                     #arg.maleCorrect()
                     arg.maleCorrect += 1
@@ -174,7 +169,7 @@ class PlayHandler(Handler):
                     arg.femaleCorrect += 1
             elif decision == "2":
                 #arg.score_up2()
-                arg.score2 += 1 
+                arg.score2 += 1
                 if arg.sex2 == "male":
                     #arg.maleCorrect()
                     arg.maleCorrect += 1
