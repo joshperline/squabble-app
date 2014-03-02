@@ -55,10 +55,10 @@
     <div class="argument-title">
         {{squabble.title}}
     </div>
-    <div class="new-argument-landing">
-        <div class="new-argument-message">
-            <div id="column1-wrap">
-                <div class="male" id="column1" >
+    <div id="column1-wrap male">
+        <div class="male" id="column1">
+            <div class="new-argument-landing">
+                <div class="new-argument-message">
                     <p class="person-name">
                         {{squabble.name1}}'s side
                     </p>
@@ -69,22 +69,28 @@
                     <input type="radio" name="decision" value="1">
                 </div>
             </div>
-            <div class="female" id="column2" >
+        </div>
+    </div>
+    <div class="female" id="column2">
+        <div class="new-argument-landing">
+            <div class="new-argument-message">
                 <p class="person-name">
                     {{squabble.name2}}'s side
                 </p>
+                <br>
                 <p>
                     {{squabble.arg2}}
                 </p>
                 <input type="radio" name="decision" value="2">
             </div>
-            <div id="clear"></div>
-            <div class="error">{{error}}</div>
         </div>
     </div>
     <div class="gameplay-options">
+        <div id="clear"></div>
+        <div class="error">{{error}}</div>
         <form>
-            Favorite<input type="checkbox" name="favorite">
+            Favorite
+            <input type="checkbox" name="favorite">
         </form>
         <button type="submit" name="submit">Submit</button>
         <br>

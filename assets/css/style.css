@@ -44,7 +44,7 @@ h1 {
     height: 400px;
     display: table;
     width: 100%;
-    background-color: #fff;
+    background-color: white
     text-align: center;
 }
 
@@ -52,30 +52,38 @@ h1 {
   content: '';
   display: inline-block;
   height: 100%;
+  background-color: white;
   vertical-align: middle;
 }
 
 .new-argument-message {
     display: inline-block;
     vertical-align: middle;
+    background-color: inherit;
     width: 100%;
     padding: 2em 0;
 }
 
 #column1-wrap{
     width: 100%;
+    background-color: inherit;
+    height: inherit;
 }
 
 #column1{
-    background-color: white;
     float: left;
     width: 50%;
+    height: inherit;
+    background-color: white;
+    text-align: center;
 }
 
 #column2{
-    background-color: white;
     float: right;
     width: 50%;
+    height: inherit;
+    background-color: white;
+    text-align: center;
 }
 
 #clear{
