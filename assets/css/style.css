@@ -8,14 +8,15 @@ body {
     background-color: black;
 }
 
-h1 {
-
+#title {
+    font-size: 1000%;
 }
 
 .frontpage-landing {
-    height: 600px;
+    height: 730px;
     display: table;
     width: 100%;
+    margin auto auto;
     background-color: #fff;
     text-align: center;
 }

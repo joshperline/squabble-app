@@ -34,11 +34,16 @@ class Argument(db.Model):
 
     name1 = db.StringProperty(required = True)
     arg1 = db.TextProperty(required = True)
+    sex1 = db.StringProperty(required = True)
+
 
     name2 = db.StringProperty(required = True)
     arg2 = db.TextProperty(required = True)
+    sex2 = db.StringProperty(required = True)
+
 
     created = db.DateTimeProperty(auto_now_add = True)
+    correctSex = db.StringProperty(required = True)
 
     #who's winning
     score = db.IntegerProperty()
@@ -52,7 +57,11 @@ class Argument(db.Model):
         score -= 1
     def ratingUp():
         rating += 1
-    
+    def maleCorrect():
+        correctSex = "male"
+    def femaleCorrect():
+        correctSex = "female"
+
 class MainHandler(Handler):
     def get(self):
         self.render("index.html")
@@ -68,9 +77,11 @@ class NewArgHandler(Handler):
         name2 = self.request.get('name2')
         arg1 = self.request.get('arg1')
         arg2 = self.request.get('arg2')
-        if (title and name1 and name2 and arg1 and arg2):
+        sex1 = self.request.get('sex1')
+        sex2 = self.request.get('sex2')
+        if (title and name1 and name2 and arg1 and arg2 and sex1 and sex2):
             a = Argument(title = title, name1 = name1, name2 = name2, arg1 = arg1,
-                          arg2 = arg2, score = 0, rating = 0)
+                          arg2 = arg2, sex1 = sex1, sex2 = sex2, score = 0, rating = 0)
             a.put()
             self.redirect("/thanks")#TODO: thanks.html
         else:
@@ -80,7 +91,14 @@ class NewArgHandler(Handler):
 
 class ThanksHandler(Handler):
     def get(self):
-        self.response.write("Thanks")
+        self.response.write("Thanks.")
+
+
+class JudgeHandler(Handler):
+    def get(self):
+        #TODO: Get best question/random, existing 
+        p = db.GqlQuery("SELECT * FROM Argument ORDER BY rating DESC")[0]
+        self.redirect('judge/%s', str(p.key().id()))
 
 class PlayHandler(Handler):
     arg = ''
@@ -90,30 +108,36 @@ class PlayHandler(Handler):
         if not arg:
             self.error(404)
             return
-        self.render("start.html", squabble = squabble)#TODO: Make sure elements are in dot notation
+        self.render("judge.html", squabble = arg)#TODO: Make sure elements are in dot notation
     def post(self):
         #change arg's score and rating.
-        up1 = self.request.get('up1')
-        up2 = self.request.get('up2')
-        star = self.request.get('up2')
-        if up1:
-            arg.score_up1()
+        #Happens after submit
+        decision = self.request.get('decision')
+        star = self.request.get('favorite')
+        if (decision):
+            #Also keeps track of male vs female
+            if decision == "1":
+                arg.score_up1()
+                if arg.sex1 == "male":
+                    arg.maleCorrect()
+                else:
+                    arg.femaleCorrect()
+            elif decision == "2":
+                arg.score_up2()
+                if arg.sex2 == "male":
+                    arg.maleCorrect()
+                else:
+                    arg.femaleCorrect()
+            if star:
+                arg.ratingsUp()
         else:
-            arg.score_up2()
-        if star:
-            arg.ratingsUp()
-
-class StartPlayHandler(Handler):
-    def get(self):
-        #TODO: Get best question/random, existing 
-        p = db.GqlQuery("SELECT * FROM Argument ORDER BY rating DESC")[0]
-        self.redirect('start/%s', str(p.key().id()))
-
+            error = "Please choose a side."
+            self.render("judge.html", squabble = arg, error = error)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/argument', NewArgHandler),
-    ('/start/', StartPlayHandler),
-    ('/start/([0-9]+)', PlayHandler),
+    ('/judge/', JudgeHandler),
+    ('/judge/([0-9]+)', PlayHandler),
     ('/thanks', ThanksHandler)
 ], debug=True)
