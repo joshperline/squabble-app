@@ -115,11 +115,19 @@ class PlayHandler(Handler):
         decision = self.request.get('decision')
         star = self.request.get('favorite')
         if (decision):
-            #TODO: Keep track of male vs female
+            #Also keeps track of male vs female
             if decision == "1":
                 arg.score_up1()
+                if arg.sex1 == "male":
+                    arg.maleCorrect()
+                else:
+                    arg.femaleCorrect()
             elif decision == "2":
                 arg.score_up2()
+                if arg.sex2 == "male":
+                    arg.maleCorrect()
+                else:
+                    arg.femaleCorrect()
             if star:
                 arg.ratingsUp()
         else:
