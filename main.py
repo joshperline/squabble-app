@@ -43,24 +43,30 @@ class Argument(db.Model):
 
 
     created = db.DateTimeProperty(auto_now_add = True)
-    correctSex = db.StringProperty(required = True)
-
+    
     #who's winning
-    score = db.IntegerProperty()
+    score1 = db.IntegerProperty()
+    score2 = db.IntegerProperty()
+
+    maleCorrect = db.IntegerProperty()
+    femaleCorrect = db.IntegerProperty()
+
     rating = db.IntegerProperty()
     #improve to hotness algorithm = db.integer
 
     #TODO: Update this shitKHJK
+    "****Methods****"
     def score_up1():
-        score += 1
+        score1 += 1
     def score_up2():
-        score -= 1
+        score2 += 1
+
     def ratingUp():
         rating += 1
     def maleCorrect():
-        correctSex = "male"
+        maleCorrect += 1
     def femaleCorrect():
-        correctSex = "female"
+        femaleCorrect += 1
 
 class MainHandler(Handler):
     def get(self):
@@ -81,8 +87,8 @@ class NewArgHandler(Handler):
         sex2 = self.request.get('sex2')
         if (title and name1 and name2 and arg1 and arg2 and sex1 and sex2):
             a = Argument(title = title, name1 = name1, name2 = name2, arg1 = arg1,
-                          arg2 = arg2, sex1 = sex1, sex2 = sex2, score = 0, rating = 0,
-                          correctSex = " ")
+                          arg2 = arg2, sex1 = sex1, sex2 = sex2, score1 = 0, score2 = 0,
+                          rating = 0, maleCorrect = 0, femaleCorrect = 0)
             a.put()
             url = 'judge/' + str(a.key().id())
             self.redirect(url)
@@ -99,9 +105,8 @@ class ThanksHandler(Handler):
 
 class JudgeHandler(Handler):
     def get(self):
-        #TODO: Get best question/random, existing 
+        #TODO: Get best question/random, existing
         args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")
-        a = ""
         for arg in args:
             a = arg
             break
@@ -109,11 +114,13 @@ class JudgeHandler(Handler):
         self.redirect(url)
 
 class PlayHandler(Handler):
-    arg = ''
-    #little weird?
+    def __init__(self, x, y):
+        Handler.__init__(self,x,y)
+        self.arg = None
+
     def get(self, arg_id):
         key = db.Key.from_path('Argument', int(arg_id))
-        arg = db.get(key)
+        self.arg = arg = db.get(key)
         #FUCKKKKKKKKKKKKKKK
         if not arg:
             self.error(404)
@@ -121,7 +128,7 @@ class PlayHandler(Handler):
         self.render("judge.html", squabble = arg)#TODO: Make sure elements are in dot notation
     def post(self):
         #change arg's score and rating.
-        #Happens after submit
+        arg = self.arg
         decision = self.request.get('decision')
         star = self.request.get('favorite')
         if (decision):
@@ -140,6 +147,8 @@ class PlayHandler(Handler):
                     arg.femaleCorrect()
             if star:
                 arg.ratingsUp()
+            #TODO: DELETE AND FIX
+            self.redirect("/")
         else:
             error = "Please choose a side."
             self.render("judge.html", squabble = arg, error = error)
@@ -147,7 +156,7 @@ class PlayHandler(Handler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/argument', NewArgHandler),
-    ('/judge/', JudgeHandler),
+    ('/judge', JudgeHandler),
     ('/judge/([0-9]+)', PlayHandler),
     ('/thanks', ThanksHandler)
 ], debug=True)
