@@ -1,4 +1,5 @@
 import os
+import random
 import webapp2
 import cgi
 import re
@@ -28,6 +29,12 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
+class IDList(db.Expando):
+    theList = db.ListProperty(int)
+
+    # def addID(self, id):
+    #     theList.append(id)
+
 #"Row" in database table
 class Argument(db.Model):
     title = db.StringProperty(required = True)
@@ -55,25 +62,28 @@ class Argument(db.Model):
     #improve to hotness algorithm = db.integer
 
     #TODO: Update this shitKHJK
-    "****Methods****"
-    def score_up1():
+    "**** CHANGE THESE Methods IN ACTUAL CODE****"
+    def score_up1(self):
         score1 += 1
-    def score_up2():
+    def score_up2(self):
         score2 += 1
 
-    def ratingUp():
+    def ratingUp(self):
         rating += 1
-    def maleCorrect():
+    def maleCorrect(self):
         maleCorrect += 1
-    def femaleCorrect():
+    def femaleCorrect(self):
         femaleCorrect += 1
 
 class MainHandler(Handler):
     def get(self):
         self.render("index.html")
 
+"DELETE Database shit"
 class NewArgHandler(Handler):
     def get(self):
+        # l = IDList(theList = [])
+        # l.put()
         self.render("argument.html")
 
     def post(self):
@@ -90,8 +100,17 @@ class NewArgHandler(Handler):
                           arg2 = arg2, sex1 = sex1, sex2 = sex2, score1 = 0, score2 = 0,
                           rating = 0, maleCorrect = 0, femaleCorrect = 0)
             a.put()
-            url = 'judge/' + str(a.key().id())
-            self.redirect(url)
+            dbList = db.GqlQuery("SELECT * FROM IDList")
+            for l in dbList:
+                idList = l
+                break
+            idList.theList.append((a.key().id()))
+            idList.put()
+
+            self.response.write(str(len(idList.theList)))
+            
+            # url = 'judge/' + str(a.key().id())
+            # self.redirect(url)
             #self.redirect(url)#TODO: MAKE thanks.html
         else:
             error = "Please fill in all required information."
@@ -106,11 +125,19 @@ class ThanksHandler(Handler):
 class JudgeHandler(Handler):
     def get(self):
         #TODO: Get best question/random, existing
-        args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")#DESC=descending order
-        for arg in args:
-            a = arg
+        # args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")#DESC=descending order
+        # for arg in args:
+        #     a = arg
+        #     break
+
+        dbList = db.GqlQuery("SELECT * FROM IDList")
+        for l in dbList:
+            idList = l
             break
-        url = 'judge/' + str(a.key().id())
+        "Gets a random key from all existing arguments"
+        key = idList.theList[random.randint(0, len(idList.theList) - 1)]
+        #url = 'judge/' + str(a.key().id())
+        url = 'judge/' + str(key)
         self.redirect(url)
 
 class PlayHandler(Handler):
