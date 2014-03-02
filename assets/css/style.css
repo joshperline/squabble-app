@@ -154,6 +154,11 @@ body {
     background-color: white;
 }
 
+.contact-info {
+    text-align: center;
+    font-size: 60px;
+}
+
 # NEW
 
 input[type=checkbox] {

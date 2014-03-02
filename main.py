@@ -87,6 +87,11 @@ class AboutHandler(Handler):
     def get(self):
         self.render("about.html")
 
+class ContactHandler(Handler):
+    def get(self):
+        self.render("contact.html")
+
+
 "DELETE Database shit"
 class NewArgHandler(Handler):
     def get(self):
@@ -198,5 +203,6 @@ app = webapp2.WSGIApplication([
     ('/judge', JudgeHandler),
     ('/judge/([0-9]+)', PlayHandler),
     ('/about', AboutHandler),
+    ('/contact', ContactHandler),
     ('/thanks', ThanksHandler)
 ], debug=True)
