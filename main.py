@@ -81,9 +81,12 @@ class NewArgHandler(Handler):
         sex2 = self.request.get('sex2')
         if (title and name1 and name2 and arg1 and arg2 and sex1 and sex2):
             a = Argument(title = title, name1 = name1, name2 = name2, arg1 = arg1,
-                          arg2 = arg2, sex1 = sex1, sex2 = sex2, score = 0, rating = 0)
+                          arg2 = arg2, sex1 = sex1, sex2 = sex2, score = 0, rating = 0,
+                          correctSex = " ")
             a.put()
-            self.redirect("/thanks")#TODO: thanks.html
+            url = 'judge/' + str(a.key().id())
+            self.redirect(url)
+            #self.redirect(url)#TODO: MAKE thanks.html
         else:
             error = "Please fill in all required information."
             self.render("argument.html", title = title, name1 = name1,
@@ -97,14 +100,21 @@ class ThanksHandler(Handler):
 class JudgeHandler(Handler):
     def get(self):
         #TODO: Get best question/random, existing 
-        p = db.GqlQuery("SELECT * FROM Argument ORDER BY rating DESC")[0]
-        self.redirect('judge/%s', str(p.key().id()))
+        args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")
+        a = ""
+        for arg in args:
+            a = arg
+            break
+        url = 'judge/' + str(a.key().id())
+        self.redirect(url)
 
 class PlayHandler(Handler):
     arg = ''
+    #little weird?
     def get(self, arg_id):
         key = db.Key.from_path('Argument', int(arg_id))
         arg = db.get(key)
+        #FUCKKKKKKKKKKKKKKK
         if not arg:
             self.error(404)
             return
