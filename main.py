@@ -174,6 +174,7 @@ class PlayHandler(Handler):
             if star:
                 arg.ratingsUp()
             #TODO: DELETE AND FIX
+            arg.put()
             self.redirect("/")
         else:
             error = "Please choose a side."
