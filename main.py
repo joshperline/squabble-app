@@ -43,7 +43,7 @@ class Argument(db.Model):
 
 
     created = db.DateTimeProperty(auto_now_add = True)
-    
+
     #who's winning
     score1 = db.IntegerProperty()
     score2 = db.IntegerProperty()
