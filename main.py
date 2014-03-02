@@ -36,7 +36,7 @@ class IDList(db.Expando):
     #     theList.append(id)
 
 #"Row" in database table
-class Argument(db.Model):
+class Argument(db.Expando):
     title = db.StringProperty(required = True)
 
     name1 = db.StringProperty(required = True)
@@ -160,21 +160,29 @@ class PlayHandler(Handler):
         if (decision):
             #Also keeps track of male vs female
             if decision == "1":
-                arg.score_up1()
+                #arg.score_up1()
+                arg.score1 += 1 
                 if arg.sex1 == "male":
-                    arg.maleCorrect()
+                    #arg.maleCorrect()
+                    arg.maleCorrect += 1
                 else:
-                    arg.femaleCorrect()
+                    #arg.femaleCorrect()
+                    arg.femaleCorrect += 1
             elif decision == "2":
-                arg.score_up2()
+                #arg.score_up2()
+                arg.score2 += 1 
                 if arg.sex2 == "male":
-                    arg.maleCorrect()
+                    #arg.maleCorrect()
+                    arg.maleCorrect += 1
                 else:
-                    arg.femaleCorrect()
+                    #arg.femaleCorrect()
+                    arg.femaleCorrect += 1
             if star:
-                arg.ratingsUp()
+                #arg.ratingsUp()
+                arg.rating += 1
             #TODO: DELETE AND FIX
-            self.redirect("/")
+            arg.put()
+            self.redirect("/judge")
         else:
             error = "Please choose a side."
             self.render("judge.html", squabble = arg, error = error)
