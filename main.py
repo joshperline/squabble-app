@@ -106,10 +106,11 @@ class ThanksHandler(Handler):
 class JudgeHandler(Handler):
     def get(self):
         #TODO: Get best question/random, existing
-        args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")
-        for arg in args:
-            a = arg
-            break
+        # args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")
+        # for arg in args:
+        #     a = arg
+        #     break
+        arg = db.get(k)
         url = 'judge/' + str(a.key().id())
         self.redirect(url)
 
