@@ -100,7 +100,6 @@ body {
     float: left;
     width: 50%;
     height: inherit;
-    background-color: white;
     text-align: center;
 }
 
@@ -108,7 +107,6 @@ body {
     float: right;
     width: 50%;
     height: inherit;
-    background-color: white;
     text-align: center;
 }
 
@@ -144,11 +142,11 @@ body {
 }
 
 .male {
-    background-color: #A2BFDB;
+    background-color: #DAEDFF;
 }
 
 .female {
-    background-color: #FFB5FF;
+    background-color: #FFE0FF;
 }
 
 .argument-window {
