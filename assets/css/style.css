@@ -6,6 +6,7 @@ body {
     font-family: "Open Sans", Helvetica, sans-serif;
     color: black;
     background-color: black;
+    text-align: center;
 }
 
 #title {
@@ -58,6 +59,30 @@ body {
 }
 
 .new-argument-message {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: inherit;
+    width: 100%;
+    padding: 2em 0;
+}
+
+.argument-landing {
+    height: 400px;
+    display: table;
+    width: 100%;
+    background-color: white
+    text-align: center;
+}
+
+.argument-landing:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  background-color: white;
+  vertical-align: middle;
+}
+
+.argument-message {
     display: inline-block;
     vertical-align: middle;
     background-color: inherit;
@@ -124,6 +149,11 @@ body {
 
 .female {
     background-color: #FFB5FF;
+}
+
+.argument-window {
+    text-align: center;
+    background-color: white;
 }
 
 

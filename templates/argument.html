@@ -52,44 +52,46 @@
 </nav>
 
 <body>
-    <div class="new-argument-landing">
-        <form method="post">
-            Title:
-            <br>
-            <input type="text" name="title" value="{{title}}">
-            <br>
-            <div class="new-argument-message">
-                <div id="column1-wrap">
-                    <div id="column1">
-                        Person 1
+    <div class="argument-window">
+        <div class="argument-landing">
+            <form method="post">
+                Title:
+                <br>
+                <input type="text" name="title" value="{{title}}">
+                <br>
+                <div class="argument-message">
+                    <div id="column1-wrap">
+                        <div id="column1">
+                            Person 1
+                            <br>
+                            <input type="text" name="name1" value="{{name1}}" placeholder="Bob">
+                            <br>
+                            <input type="radio" name="sex1" value="male">Male
+                            <input type="radio" name="sex1" value="female">Female
+                            <br>Argument
+                            <br>
+                            <textarea class="argument-text-box" name="arg1">{{arg1}}</textarea>
+                            <br>
+                        </div>
+                    </div>
+                    <div id="column2">
+                        Person 2
                         <br>
-                        <input type="text" name="name1" value="{{name1}}" placeholder="Bob">
+                        <input type="text" name="name2" value="{{name2}}" placeholder="Alice">
                         <br>
-                        <input type="radio" name="sex1" value="male">Male
-                        <input type="radio" name="sex1" value="female">Female
+                        <input type="radio" name="sex2" value="male">Male
+                        <input type="radio" name="sex2" value="female">Female
                         <br>Argument
                         <br>
-                        <textarea class="argument-text-box" name="arg1">{{arg1}}</textarea>
+                        <textarea class="argument-text-box" name="arg2">{{arg2}}</textarea>
                         <br>
                     </div>
+                    <div id="clear"></div>
+                    <button type="submit" name="submit">Take This to Court</button>
+                    <div class="error">{{error}}</div>
                 </div>
-                <div id="column2">
-                    Person 2
-                    <br>
-                    <input type="text" name="name2" value="{{name2}}" placeholder="Alice">
-                    <br>
-                    <input type="radio" name="sex2" value="male">Male
-                    <input type="radio" name="sex2" value="female">Female
-                    <br>Argument
-                    <br>
-                    <textarea class="argument-text-box" name="arg2">{{arg2}}</textarea>
-                    <br>
-                </div>
-                <div id="clear"></div>
-                <button type="submit" name="submit">Take This to Court</button>
-                <div class="error">{{error}}</div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
