@@ -106,17 +106,12 @@ class ThanksHandler(Handler):
 class JudgeHandler(Handler):
     def get(self):
         #TODO: Get best question/random, existing
-<<<<<<< HEAD
-        p = db.GqlQuery("SELECT * FROM Argument ORDER BY rating DESC")[0]
-        self.redirect('judge/%s', str(p.key().id()))
-=======
         args = db.GqlQuery("SELECT * FROM Argument ORDER BY created DESC")
         for arg in args:
             a = arg
             break
         url = 'judge/' + str(a.key().id())
         self.redirect(url)
->>>>>>> 6e67dd53ff17809b22f0f910c987e28b7f4289f8
 
 class PlayHandler(Handler):
     def __init__(self, x, y):
@@ -126,7 +121,6 @@ class PlayHandler(Handler):
     def get(self, arg_id):
         key = db.Key.from_path('Argument', int(arg_id))
         self.arg = arg = db.get(key)
-        #FUCKKKKKKKKKKKKKKK
         if not arg:
             self.error(404)
             return
