@@ -90,7 +90,7 @@ class PlayHandler(Handler):
         if not arg:
             self.error(404)
             return
-        self.render("start.html", arg = arg)#TODO: Make sure elements are in dot notation
+        self.render("start.html", squabble = squabble)#TODO: Make sure elements are in dot notation
     def post(self):
         #change arg's score and rating.
         up1 = self.request.get('up1')
