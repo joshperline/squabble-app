@@ -62,14 +62,21 @@
                     <p class="person-name">
                         {{squabble.person1}}'s side
                     </p>
-                    <br>{{squabble.arg1}}
+                    <br>
+                    <p>
+                        {{squabble.arg1}}
+                    </p>
+                    <input type="radio" name="decision">
                 </div>
             </div>
             <div id="column2">
                 <p class="person-name">
                     {{squabble.person2}}'s side
                 </p>
-                <br>{{squabble.arg2}}
+                <p>
+                    {{squabble.arg2}}
+                </p>
+                <input type="radio" name="decision">
             </div>
             <div id="clear"></div>
             <div class="error">{{error}}</div>
