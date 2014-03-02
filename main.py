@@ -52,13 +52,17 @@ class Argument(db.Expando):
     created = db.DateTimeProperty(auto_now_add = True)
 
     #who's winning
-    score1 = db.IntegerProperty(required = True)
-    score2 = db.IntegerProperty(required = True)
+    # score1 = db.IntegerProperty(required = True)
+    # score2 = db.IntegerProperty(required = True)
 
-    maleCorrect = db.IntegerProperty(required = True)
-    femaleCorrect = db.IntegerProperty(required = True)
+    # maleCorrect = db.IntegerProperty(required = True)
+    # femaleCorrect = db.IntegerProperty(required = True)
 
-    rating = db.IntegerProperty(required = True)
+    # rating = db.IntegerProperty(required = True)
+    score1 = 0
+    score2 = 0
+    maleCorrect = 0
+    femaleCorrect = 0
     #improve to hotness algorithm = db.integer
 
     #TODO: Update this shitKHJK
@@ -107,10 +111,8 @@ class NewArgHandler(Handler):
             idList.theList.append((a.key().id()))
             idList.put()
 
-            self.response.write(str(len(idList.theList)))
-
-            # url = 'judge/' + str(a.key().id())
-            # self.redirect(url)
+            url = 'judge/' + str(a.key().id())
+            self.redirect(url)
             #self.redirect(url)#TODO: MAKE thanks.html
         else:
             error = "Please fill in all required information."
@@ -161,21 +163,21 @@ class PlayHandler(Handler):
             if decision == "1":
                 #arg.score_up1()
                 arg.score1 += 1
-                if arg.sex1 == "male":
-                    #arg.maleCorrect()
-                    arg.maleCorrect += 1
-                else:
-                    #arg.femaleCorrect()
-                    arg.femaleCorrect += 1
+                # if arg.sex1 == "male":
+                #     #arg.maleCorrect()
+                #     arg.maleCorrect += 1
+                # else:
+                #     #arg.femaleCorrect()
+                #     arg.femaleCorrect += 1
             elif decision == "2":
                 #arg.score_up2()
                 arg.score2 += 1
-                if arg.sex2 == "male":
-                    #arg.maleCorrect()
-                    arg.maleCorrect += 1
-                else:
-                    #arg.femaleCorrect()
-                    arg.femaleCorrect += 1
+                # if arg.sex2 == "male":
+                #     #arg.maleCorrect()
+                #     arg.maleCorrect += 1
+                # else:
+                #     #arg.femaleCorrect()
+                #     arg.femaleCorrect += 1
             if star:
                 #arg.ratingsUp()
                 arg.rating += 1
