@@ -41,7 +41,7 @@ h1 {
 }
 
 .new-argument-landing {
-    height: 600px;
+    height: 400px;
     display: table;
     width: 100%;
     background-color: #fff;
@@ -86,9 +86,27 @@ h1 {
     color: red;
 }
 
-.argument-box {
+.argument-title {
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-size: 35px;
+}
+
+.person-name {
+    font-style: italic;
+    font-size: 25px;
+}
+
+.argument-text-box {
     width: 300px;
     height: 200px;
+}
+
+.gameplay-options {
+    background-color: white;
+    color: black;
+    text-align: center;
 }
 
 

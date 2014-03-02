@@ -30,21 +30,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" name="home"><b>Squabble</b></a>
+            <a class="navbar-brand" href="./" name="home">Home</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
-                <li class="active"><a href="./argument" name="new">Settle a New Argument</a>
-
+                <li class="active"><a href="#" name="new">Make a New Argument</a>
                 </li>
-                <li><a href="./about" name="about">About</a>
+                <li><a href="#" name="about">About</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./contact" name="contact">Contact</a>
+                <li><a href="#" name="contact">Contact</a>
                 </li>
             </ul>
         </div>
@@ -54,19 +52,34 @@
 </nav>
 
 <body>
-    <div class="frontpage-landing">
-        <div class="frontpage-message">
-            <h1 name="argument">Squabble</h1>
-            <main class="bs-docs-masthead" id="content" role="main">
-                <div class="container" style="text-align:center">
-                    <!-- <h1>Bootstrap</h1> -->
-                    <p class="lead">Where Strangers Settle Your Arguments For You!</p>
-                    <a href="./judge.html">
-                        <button type="button" name="start">Start Judging Now</button>
-                    </a>
+    <div class="argument-title">
+        {{squabble.title}}
+    </div>
+    <div class="new-argument-landing">
+        <div class="new-argument-message">
+            <div id="column1-wrap">
+                <div id="column1">
+                    <p class="person-name">
+                        {{squabble.person1}}'s side
+                    </p>
+                    <br>{{squabble.arg1}}
                 </div>
-            </main>
+            </div>
+            <div id="column2">
+                <p class="person-name">
+                    {{squabble.person2}}'s side
+                </p>
+                <br>{{squabble.arg2}}
+            </div>
+            <div id="clear"></div>
+            <div class="error">{{error}}</div>
         </div>
+    </div>
+    <div class="gameplay-options">
+        <button type="submit" name="submit">Submit</button>
+        <br>
+        <br>
+        <button type="submit" name="submit">Skip</button>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
