@@ -32,9 +32,6 @@ class Handler(webapp2.RequestHandler):
 class IDList(db.Expando):
     theList = db.ListProperty(int)
 
-    # def addID(self, id):
-    #     theList.append(id)
-
 #"Row" in database table
 class Argument(db.Expando):
     title = db.StringProperty(required = True)
@@ -61,8 +58,7 @@ class Argument(db.Expando):
     rating = db.IntegerProperty(required = True)
     #improve to hotness algorithm = db.integer
 
-    #TODO: Update this shitKHJK
-    "**** CHANGE THESE Methods IN ACTUAL CODE****"
+    "**** CHANGE THESE Methods INTO ACTUAL CODE****"
     def score_up1(self):
         score1 += 1
     def score_up2(self):
@@ -70,16 +66,11 @@ class Argument(db.Expando):
 
     def ratingUp(self):
         rating += 1
-    def maleCorrect(self):
-        maleCorrect += 1
-    def femaleCorrect(self):
-        femaleCorrect += 1
 
 class MainHandler(Handler):
     def get(self):
         self.render("index.html")
 
-"DELETE Database shit"
 class NewArgHandler(Handler):
     def get(self):
         # l = IDList(theList = [])
