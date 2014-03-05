@@ -14,15 +14,36 @@ body {
 }
 
 .frontpage-landing {
-/*    height: 570px;*/
-    height: 100%;
-    min-height: 100%;
+    height: 570px;
     display: table;
     width: 100%;
     margin auto auto;
     background-color: #fff;
-    background-image: url('../images/background.jpg');
     text-align: center;
+}
+
+.indexer {
+    z-index: 10;
+}
+
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 0;
+}
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+  z-index: 0;
 }
 
 .frontpage-landing h1 {
@@ -45,11 +66,15 @@ body {
     padding: 10em 0;
 }
 
+.cover {
+    position: relative;
+    z-index: 1;
+}
+
 .new-argument-landing {
     height: 400px;
     display: table;
     width: 100%;
-    background-color: white
     text-align: center;
 }
 
@@ -57,7 +82,6 @@ body {
   content: '';
   display: inline-block;
   height: 100%;
-  background-color: white;
   vertical-align: middle;
 }
 
@@ -73,7 +97,6 @@ body {
     height: 570px;
     display: table;
     width: 100%;
-    background-color: white
     text-align: center;
 }
 
@@ -81,7 +104,6 @@ body {
   content: '';
   display: inline-block;
   height: 100%;
-  background-color: white;
   vertical-align: middle;
 }
 
@@ -122,7 +144,6 @@ body {
 }
 
 .argument-title {
-    background-color: white;
     color: black;
     text-align: center;
     font-size: 35px;
@@ -139,7 +160,6 @@ body {
 }
 
 .gameplay-options {
-    background-color: white;
     color: black;
     text-align: center;
 }
