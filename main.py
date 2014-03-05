@@ -69,6 +69,17 @@ class NewArgHandler(Handler):
     def get(self):
         self.render("argument.html")
 
+    def filter_curses(self, arg1, arg2):
+        # arg1 = arg1.split()#defaults on whitespace
+        # arg2 = arg2.split()
+        Curses = [".*fuck.*", ".*shit.*", ".*\sass.*", ".*bitch.*", ".*nigg.*",
+                    ".*fag.*", ".*pussy", ".*shit.*", ".*whore.*", ".*cunt.*",
+                    ".*dick.*", ".*cock.*", ".*piss.*", ".*Perline.*"]
+        for curse in Curses:
+            if re.match(curse, arg1, flags=re.IGNORECASE) or re.match(curse, arg2, flags=re.IGNORECASE):
+                return False
+        return True
+
     def post(self):
         title = self.request.get('title')
         name1 = self.request.get('name1')
@@ -78,17 +89,22 @@ class NewArgHandler(Handler):
         sex1 = self.request.get('sex1')
         sex2 = self.request.get('sex2')
         if (title and name1 and name2 and arg1 and arg2 and sex1 and sex2):
-            a = Argument(title = title, name1 = name1, name2 = name2, arg1 = arg1,
-                          arg2 = arg2, sex1 = sex1, sex2 = sex2, score1 = 0, score2 = 0,
-                          rating = 0, maleCorrect = 0, femaleCorrect = 0)
-            a.put()
+            if self.filter_curses(arg1=arg1, arg2=arg2):
+                a = Argument(title = title, name1 = name1, name2 = name2, arg1 = arg1,
+                              arg2 = arg2, sex1 = sex1, sex2 = sex2, score1 = 0, score2 = 0,
+                              rating = 0, maleCorrect = 0, femaleCorrect = 0)
+                a.put()
 
-            idList = db.GqlQuery("SELECT * FROM IDList").get()
-            idList.theList.append((a.key().id()))
-            idList.put()
+                idList = db.GqlQuery("SELECT * FROM IDList").get()
+                idList.theList.append((a.key().id()))
+                idList.put()
 
-            url = 'judge/' + str(a.key().id())
-            self.redirect(url)
+                url = 'judge/' + str(a.key().id())
+                self.redirect(url)
+            else:
+                error = "Please refrain from using foul language."
+                self.render("argument.html", title = title, name1 = name1,
+                            name2 = name2, arg1 = "", arg2 = "", error = error)
         else:
             error = "Please fill in all required information."
             self.render("argument.html", title = title, name1 = name1,
